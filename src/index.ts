@@ -4,7 +4,7 @@ import { Octokit, App } from "octokit"
 import axios from 'axios'
 import ProgressBar from 'progress'
 import { IGradleDependency } from './types/gradleDependencies'
-import { IDepNode } from './types/dependenciesGraph'
+import { IDepNode, Th2RepoType } from './types/dependenciesGraph'
 import { IPythonDependency } from './types/pythonDependencies'
 const g2js = require('gradle-to-js/lib/parser')
 let progressBar: ProgressBar
@@ -23,6 +23,8 @@ async function main(){
   
   const repos: (typeof repoExample)[] = []
   const commitsCounts = new Map<string, number>()
+  const dockerUsageMap = new Map<string, boolean>()
+  const reposTypesMap = new Map<string, Th2RepoType>()
   const reposDepandencies = new Map<string, IDepNode[]>()
   for (let i = 0; i * REPOS_PER_PAGE < th2Net.data.public_repos; i ++) {
     repos.push(...(await octokit.rest.repos.listForOrg({ org: 'th2-net', per_page: REPOS_PER_PAGE, page: i + 1})).data)
@@ -51,6 +53,51 @@ async function main(){
     .filter(repo => !repo.name.includes('test'))
     .filter(repo => (commitsCounts.get(repo.name) || 0) > 1)
   console.log('repos after filter:', filteredRepos.length)
+
+  // Get repo meta
+
+  progressBar = new ProgressBar('Getting meta info [:bar] :repo', {
+    total: filteredRepos.length,
+    width: 20
+  })
+  promises = filteredRepos.map(async repo => {
+    const platformsFlags = {
+      jar: false,
+      py: false,
+      js: false,
+      docker: false
+    }
+
+
+    try {
+      const { data: dockerfile } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/Dockerfile`)
+      if (dockerfile) platformsFlags.docker = true
+    } catch (e) {}
+    try {
+      const { data: packageJson } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/package.json`)
+      if (packageJson) platformsFlags.js = true
+    } catch (e) {}
+    try {
+      const { data: requirementsTxt } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/requirements.txt`)
+      if (requirementsTxt) platformsFlags.py = true
+    } catch (e) {}
+    try {
+      const { data: gradleBuild } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/build.gradle`)
+      if (gradleBuild) platformsFlags.jar = true
+    } catch (e) {}
+
+    dockerUsageMap.set(repo.name, platformsFlags.docker)
+
+    if (platformsFlags.jar && platformsFlags.py) reposTypesMap.set(repo.name, 'jar & py')
+    else if (platformsFlags.py) reposTypesMap.set(repo.name, 'py')
+    else if (platformsFlags.js) reposTypesMap.set(repo.name, 'js')
+    else reposTypesMap.set(repo.name, 'jar')
+    
+    progressBar.tick({
+      repo: repo.name
+    })
+  })
+  await Promise.all(promises)
 
   //Get dependencies
 
