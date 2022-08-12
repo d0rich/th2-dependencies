@@ -1,7 +1,7 @@
-
+export type Th2RepoType = 'jar' | 'py' | 'jar & py' | 'js'
 export interface IDepNode {
   name: string,
-  type: 'jar' | 'py' | 'jar & py',
+  type: Th2RepoType,
   docker: boolean
 }
 

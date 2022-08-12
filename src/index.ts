@@ -5,6 +5,7 @@ import axios from 'axios'
 import ProgressBar from 'progress'
 import { IGradleDependency } from './types/gradleDependencies'
 import { IDepNode } from './types/dependenciesGraph'
+import { IPythonDependency } from './types/pythonDependencies'
 const g2js = require('gradle-to-js/lib/parser')
 let progressBar: ProgressBar
 let promises: Promise<any>[]
@@ -58,21 +59,53 @@ async function main(){
     width: 20
   })
   promises = filteredRepos.map(async repo => {
-    let dependencies: IDepNode[] = []
-    if (['Kotlin', 'Java'].includes(repo.language || '')) {
+    const dependencies: IDepNode[] = []
+    try {
       const gradleBuildFile = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/build.gradle`)
-      const parsedGradleBuildFile: { dependencies: IGradleDependency[] | undefined } = await g2js.parseText(gradleBuildFile.data)
-      if (parsedGradleBuildFile?.dependencies) {
-        dependencies = parsedGradleBuildFile.dependencies
-          .filter(dep => dep.group === 'com.exactpro.th2')
-          .map((dep): IDepNode => ({
-            name: `th2-${dep.name}`,
-            type: 'jar',
-            docker: false
-            }))
-      }
+      const parsedGradleBuildFile: { dependencies: IGradleDependency[] } = await g2js.parseText(gradleBuildFile.data)
+      const gradleDependencies = parsedGradleBuildFile.dependencies
+        .filter(dep => dep.group === 'com.exactpro.th2')
+        .map((dep): IDepNode => ({
+          name: `th2-${dep.name}`,
+          type: 'jar',
+          docker: false
+          }))
+        dependencies.push(...gradleDependencies)
       
     }
+    catch(e){}
+
+    try {
+      const requirements: { data: string } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/requirements.txt`)
+      const parsedRequirements: IDepNode[] = requirements.data
+        .split('\n')
+        .filter(line => !line.startsWith('#'))
+        .filter(line => !!line.trim())
+        .map((line): IPythonDependency => {
+          if (line.includes('==')) {
+            const [name, version] = line.trim().split('==')
+            return { name, version }
+          }
+          if (line.includes('>=')) {
+            const [name, version] = line.trim().split('>=')
+            return { name, version }
+          }
+          if (line.includes('<=')) {
+            const [name, version] = line.trim().split('<=')
+            return { name, version }
+          }
+          const [name, version] = line.trim().split('~=')
+          return { name, version }
+        })
+        .map(dep => ({
+          name: dep.name,
+          docker: false,
+          type: 'py'
+        }))
+      console.log(repo.name, parsedRequirements)
+      dependencies.push(...parsedRequirements)
+    }
+    catch(e){}
     
     reposDepandencies.set(repo.name, dependencies)
     progressBar.tick({
