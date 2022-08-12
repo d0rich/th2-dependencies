@@ -166,6 +166,15 @@ export async  function parse(){
     type: reposTypesMap.get(repo.name) || 'jar'
   }))
 
+  for (const [repoName, dependencies] of reposDepandencies) {
+    for (let i = 0; i < dependencies.length; i++){
+      const depNodeIndex = depNodes.findIndex(dep => dep.name === dependencies[i].name)
+      if (depNodeIndex > -1) {
+        dependencies[i] = depNodes[depNodeIndex]
+      }
+    }
+  }
+
   return {
     repos: filteredRepos, depNodes,
     dockerUsageMap, reposTypesMap, reposDepandencies
