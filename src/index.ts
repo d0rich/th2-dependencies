@@ -1,5 +1,6 @@
 import { build } from './buildGraph'
 import { parse } from './parseInfo'
+import { render } from './render'
 import { IDepEdge, IDepNode } from './types/dependenciesGraph'
 
 async function main(){
@@ -25,7 +26,8 @@ async function main(){
     }
     
   }
-  build(allNodes, allEdges)
+  const plantUml = build(allNodes, allEdges)
+  await render(plantUml)
 }
 
 main()
