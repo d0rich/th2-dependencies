@@ -4,13 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "ts-node ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@octokit/types": "^6.41.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
+    "octokit": "^2.0.5",
     "plantuml": "^0.0.1"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
   }
 }
