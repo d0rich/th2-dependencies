@@ -1,6 +1,6 @@
 import { build } from './buildGraph'
 import { parse } from './parseInfo'
-import { IDepNode } from './types/dependenciesGraph'
+import { IDepEdge, IDepNode } from './types/dependenciesGraph'
 
 async function main(){
   const { repos, depNodes, reposDepandencies,
@@ -11,7 +11,21 @@ async function main(){
       if (!allNodes.includes(dep)) allNodes.push(dep)
     }
   }
-  build(allNodes, [])
+  const allEdges: IDepEdge[] = []
+  for (const [repoName, dependencies] of reposDepandencies) {
+    const node = allNodes.find(node => node.name === repoName)
+    if(node) {
+      for(const dep of dependencies) {
+      allEdges.push({
+        from: dep,
+        to: node,
+        type: node.type
+      })
+    }
+    }
+    
+  }
+  build(allNodes, allEdges)
 }
 
 main()

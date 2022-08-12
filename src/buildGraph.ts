@@ -12,8 +12,11 @@ export function build(nodes: IDepNode[], edges: IDepEdge[]){
   for(const node of nodes){
     plantUml.push(renderNode(node))
   }
+  for(const edge of edges){
+    plantUml.push(renderEdge(edge))
+  }
   plantUml.push('@enduml')
-  console.log(plantUml.join('\n'))
+  return plantUml.join('\n')
 }
 
 function applyStyle(){
@@ -83,4 +86,8 @@ function plantifyName(name: string){
 
 function renderNode(node: IDepNode){
   return `agent "${node.docker ? '<$docker> ': ''}${deleteUnsupportedSymbols(node.name)}" as ${plantifyName(node.name)} ${stylesMap.get(node.type) || ''}`
+}
+
+function renderEdge(edge: IDepEdge) {
+  return `${plantifyName(edge.from.name)} --> ${plantifyName(edge.to.name)}: ${edge.type}`
 }
