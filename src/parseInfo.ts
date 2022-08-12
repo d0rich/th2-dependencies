@@ -160,8 +160,14 @@ export async  function parse(){
   })
   await Promise.all(promises)
 
+  const depNodes: IDepNode[] = filteredRepos.map(repo => ({
+    name: repo.name,
+    docker: dockerUsageMap.get(repo.name) || false,
+    type: reposTypesMap.get(repo.name) || 'jar'
+  }))
+
   return {
-    repos: filteredRepos,
+    repos: filteredRepos, depNodes,
     dockerUsageMap, reposTypesMap, reposDepandencies
   }
 }
