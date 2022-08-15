@@ -9,7 +9,6 @@ async function main(){
     dockerUsageMap, reposTypesMap } = await parse()
   postProcessFunctions.commonLibraries(depNodes, depEdges)
   const { allEdges, allNodes } = renderFunctions.filter({ allNodes: depNodes, allEdges: depEdges }, { repos })
-  console.log(allEdges.filter(edge => edge.to.name === 'th2-check2-recon'))
   const plantUml = build(allNodes, allEdges)
   await render(plantUml)
 }
