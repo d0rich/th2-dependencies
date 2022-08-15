@@ -1,4 +1,5 @@
 import nodeTest from "node:test";
+import { renderFunctions } from "./custom";
 import { IDepEdge, IDepNode, Th2RepoType } from "./types/dependenciesGraph";
 
 const stylesMap = new Map<Th2RepoType, string>()
@@ -92,5 +93,10 @@ function renderNode(node: IDepNode){
 }
 
 function renderEdge(edge: IDepEdge) {
-  return `${plantifyName(edge.from.name)} ..> ${plantifyName(edge.to.name)}: ${edge.type}`
+  return `${plantifyName(edge.from.name)} ${renderArrow(edge)} ${plantifyName(edge.to.name)}: ${edge.type}`
+}
+
+function renderArrow(edge: IDepEdge) {
+
+  return renderFunctions.renderArrow(edge) || '..>'
 }
