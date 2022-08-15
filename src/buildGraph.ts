@@ -93,10 +93,13 @@ function renderNode(node: IDepNode){
 }
 
 function renderEdge(edge: IDepEdge) {
-  return `${plantifyName(edge.from.name)} ${renderArrow(edge)} ${plantifyName(edge.to.name)}: ${edge.type}`
+  return `${plantifyName(edge.from.name)} ${renderArrow(edge)} ${plantifyName(edge.to.name)} ${renderArrowStyle(edge)}: ${edge.type}`
 }
 
 function renderArrow(edge: IDepEdge) {
-
   return renderFunctions.renderArrow(edge) || '..>'
+}
+
+function renderArrowStyle(edge: IDepEdge) {
+  return renderFunctions.renderArrowStyle(edge) || ''
 }

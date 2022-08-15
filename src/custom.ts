@@ -13,6 +13,13 @@ export const renderFunctions = {
   },
   renderArrow(edge: IDepEdge) {
     if (edge.from.name.startsWith('th2-common')) return '.u.>'
+  },
+  renderArrowStyle(edge: IDepEdge) {
+    if (edge.from.name.startsWith('th2-common')){
+      if (edge.from.type === 'py') return '#ffeb94'
+      if (edge.from.type === 'jar') return '#fccaa7'
+    }
+    if (edge.from.name === 'th2-grpc-common') return '#a0cdfa'
   }
 }
 
