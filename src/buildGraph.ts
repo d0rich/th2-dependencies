@@ -2,10 +2,11 @@ import nodeTest from "node:test";
 import { IDepEdge, IDepNode, Th2RepoType } from "./types/dependenciesGraph";
 
 const stylesMap = new Map<Th2RepoType, string>()
-stylesMap.set("jar", '#fc6b03')
-stylesMap.set("py", '#fcce03')
-stylesMap.set('jar & py', '#0380fc')
-stylesMap.set('js', '#03fc6f')
+stylesMap.set("jar", '#fccaa7')
+stylesMap.set("py", '#ffeb94')
+stylesMap.set('jar & py', '#a0cdfa')
+stylesMap.set('js', '#9ffcc8')
+stylesMap.set('undefined', '#d7d7d7')
 
 export function build(nodes: IDepNode[], edges: IDepEdge[]){
   const plantUml: string[] = ['@startuml']
