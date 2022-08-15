@@ -1,3 +1,4 @@
+import nodeTest from "node:test";
 import { IDepEdge, IDepNode, Th2RepoType } from "./types/dependenciesGraph";
 
 const stylesMap = new Map<Th2RepoType, string>()
@@ -22,6 +23,7 @@ export function build(nodes: IDepNode[], edges: IDepEdge[]){
 function applyStyle(){
   return [
     'left to right direction',
+    'skinparam linetype polyline',
     `sprite $docker [48x48/16] {
 000000000000000000000000000000000000000000000000
 000000000000000000000000000000000000000000000000
@@ -89,5 +91,5 @@ function renderNode(node: IDepNode){
 }
 
 function renderEdge(edge: IDepEdge) {
-  return `${plantifyName(edge.from.name)} --> ${plantifyName(edge.to.name)}: ${edge.type}`
+  return `${plantifyName(edge.from.name)} ..> ${plantifyName(edge.to.name)}: ${edge.type}`
 }

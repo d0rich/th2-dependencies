@@ -6,6 +6,8 @@ import ProgressBar from 'progress'
 import { IGradleDependency } from './types/gradleDependencies'
 import { IDepNode, Th2RepoType } from './types/dependenciesGraph'
 import { IPythonDependency } from './types/pythonDependencies'
+import { Repositories } from './types/github'
+import { parseFunctions } from './custom'
 const g2js = require('gradle-to-js/lib/parser')
 let progressBar: ProgressBar
 let promises: Promise<any>[]
@@ -19,9 +21,8 @@ export async  function parse(){
   console.log('all repos in th2-net', th2Net.data.public_repos)
 
   const REPOS_PER_PAGE = 100
-  const repoExample = (await octokit.rest.repos.listForOrg({ org: 'th2-net' })).data[0]
   
-  const repos: (typeof repoExample)[] = []
+  const repos: Repositories = []
   const commitsCounts = new Map<string, number>()
   const dockerUsageMap = new Map<string, boolean>()
   const reposTypesMap = new Map<string, Th2RepoType>()
@@ -47,11 +48,7 @@ export async  function parse(){
 
   // Filter repos
 
-  const filteredRepos = repos
-    .filter(repo => ![ '.github', 'th2-documentation', 'th2-infra' ].includes(repo.name))
-    .filter(repo => !repo.name.includes('demo'))
-    .filter(repo => !repo.name.includes('test'))
-    .filter(repo => (commitsCounts.get(repo.name) || 0) > 1)
+  const filteredRepos = parseFunctions.filterRepos(repos, { commitsCounts })
   console.log('repos after filter:', filteredRepos.length)
 
   // Get repo meta
@@ -91,7 +88,8 @@ export async  function parse(){
     if (platformsFlags.jar && platformsFlags.py) reposTypesMap.set(repo.name, 'jar & py')
     else if (platformsFlags.py) reposTypesMap.set(repo.name, 'py')
     else if (platformsFlags.js) reposTypesMap.set(repo.name, 'js')
-    else reposTypesMap.set(repo.name, 'jar')
+    else if (platformsFlags.jar) reposTypesMap.set(repo.name, 'jar')
+    else reposTypesMap.set(repo.name, 'undefined')
     
     progressBar.tick({
       repo: repo.name

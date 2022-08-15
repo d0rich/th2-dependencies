@@ -1,4 +1,4 @@
-export type Th2RepoType = 'jar' | 'py' | 'jar & py' | 'js'
+export type Th2RepoType = 'jar' | 'py' | 'jar & py' | 'js' | 'cpp' | 'undefined'
 export interface IDepNode {
   name: string,
   type: Th2RepoType,
