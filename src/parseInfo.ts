@@ -123,7 +123,7 @@ export async  function parse(){
       const gradleBuildFile = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/build.gradle`)
       const parsedGradleBuildFile: { dependencies: IGradleDependency[] } = await g2js.parseText(gradleBuildFile.data)
       const gradleDependencies = parsedGradleBuildFile.dependencies
-        .filter(dep => dep.type === 'implementation')
+        .filter(dep => dep.type !== 'testImplementation')
         .map((dep): IDepNode => ({
           name: `${dep.group === 'com.exactpro.th2' ? 'th2-' : ''}${dep.name}`,
           type: 'jar',

@@ -68,7 +68,6 @@ export const postProcessFunctions = {
       }
       for (const [ nodeFrom, edgesLocal ] of groups) {
         if (edgesLocal.length > 1) {
-          if(node.name === 'th2-grpc-crawler-data-processor') console.log(edges)
           const unitedType = edgesLocal.map(edge => edge.type).sort().join(' & ')
           for (const edge of edgesLocal){
             edges.splice(edges.findIndex(e => edge === e), 1)
