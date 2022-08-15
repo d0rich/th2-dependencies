@@ -14,6 +14,7 @@
     "dotenv": "^16.0.1",
     "gradle-to-js": "^2.0.1",
     "node-plantuml": "^0.9.0",
+    "node-plantuml-latest": "^2.2.0",
     "octokit": "^2.0.5",
     "plantuml": "^0.0.1",
     "progress": "^2.0.3"

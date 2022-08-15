@@ -28,6 +28,9 @@ function applyStyle(options: DiagramOptions){
   return [
     'left to right direction',
     `skinparam linetype ${options.lineType}`,
+    'skinparam ArrowColor #212121',
+    'skinparam AgentBorderColor #212121',
+    'skinparam roundCorner 10',
     `sprite $docker [48x48/16] {
 000000000000000000000000000000000000000000000000
 000000000000000000000000000000000000000000000000
@@ -94,11 +97,11 @@ function applyLegend(){
 }
 
 function deleteUnsupportedSymbols(name: string){
-  return name.replace(/[\[\]]/g, '')
+  return name.replace(/[\[\]"']/g, '_')
 }
 
 function plantifyName(name: string){
-  return deleteUnsupportedSymbols(name.replace(/-/g, ''))
+  return deleteUnsupportedSymbols(name.replace(/[-\.:${}() ]/g, ''))
 }
 
 function renderNode(node: IDepNode){

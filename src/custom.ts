@@ -3,7 +3,8 @@ import { Repositories, Repository } from "./types/github"
 
 export const renderFunctions = {
   filter({ allNodes, allEdges }: { allNodes: IDepNode[], allEdges: IDepEdge[] },
-      { repos }: { repos: Repositories }){
+      { repos, includeExternal }: { repos: Repositories, includeExternal: boolean }){
+    if (includeExternal) return {allNodes, allEdges}
     return {
       allNodes: allNodes.filter(node => repos.some(repo => repo.name === node.name)),
       allEdges: allEdges
@@ -13,6 +14,7 @@ export const renderFunctions = {
   },
   renderArrow(edge: IDepEdge) {
     if (edge.from.name.startsWith('th2-common')) return '.u.>'
+    if (!edge.from.name.startsWith('th2')) return '....>'
   },
   renderArrowStyle(edge: IDepEdge) {
     if (edge.from.name.startsWith('th2-common')){
@@ -20,6 +22,8 @@ export const renderFunctions = {
       if (edge.from.type === 'jar') return '#fccaa7'
     }
     if (edge.from.name === 'th2-grpc-common') return '#a0cdfa'
+    if (edge.from.name === 'th2-sailfish-utils') return '#b0b0b0'
+    if (!edge.from.name.startsWith('th2')) return '#d7d7d7'
   }
 }
 
