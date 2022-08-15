@@ -13,6 +13,7 @@ stylesMap.set('undefined', '#d7d7d7')
 export function build(nodes: IDepNode[], edges: IDepEdge[], options: DiagramOptions = { lineType: 'curve' }){
   const plantUml: string[] = ['@startuml']
   plantUml.push(...applyStyle(options))
+  plantUml.push(...applyLegend())
   for(const node of nodes){
     plantUml.push(renderNode(node))
   }
@@ -79,6 +80,17 @@ function applyStyle(options: DiagramOptions){
 }`,
 
   ]
+}
+
+function applyLegend(){
+  const legend: string[] = []
+  legend.push('legend top left')
+  legend.push('|= |= Type |')
+  for (const [repoType, style] of stylesMap) {
+    legend.push(`|<back:${style}>   </back>| ${repoType} Artifacts |`)
+  }
+  legend.push('endlegend')
+  return legend
 }
 
 function deleteUnsupportedSymbols(name: string){
