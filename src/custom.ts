@@ -41,6 +41,9 @@ export const postProcessFunctions = {
             break;
         }
       }
+      if(node.type === 'jar & py') {
+        node.docker = false
+      }
     })
   }
 }
