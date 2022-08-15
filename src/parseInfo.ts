@@ -67,7 +67,8 @@ export async  function parse(){
 
     try {
       const { data: dockerfile } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/Dockerfile`)
-      if (dockerfile) platformsFlags.docker = true
+      if (dockerfile.includes('ENTRYPOINT') || dockerfile.includes('EXPOSE')) 
+        platformsFlags.docker = true
     } catch (e) {}
     try {
       const { data: packageJson } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/package.json`)
