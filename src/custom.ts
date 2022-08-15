@@ -52,5 +52,30 @@ export const postProcessFunctions = {
         node.docker = false
       }
     })
+  },
+  unitedDependencies(nodes: IDepNode[], edges: IDepEdge[]) {
+    nodes.forEach(node => {
+      const dependencies = edges.filter(edge => edge.to === node)
+
+      const groups = new Map<IDepNode, IDepEdge[]>()
+      for (const dep of dependencies) {
+        if (!groups.has(dep.from))
+          groups.set(dep.from, dependencies.filter(dep2 => dep.from === dep2.from))
+      }
+      for (const [ nodeFrom, edgesLocal ] of groups) {
+        if (edgesLocal.length > 1) {
+          if(node.name === 'th2-grpc-crawler-data-processor') console.log(edges)
+          const unitedType = edgesLocal.map(edge => edge.type).sort().join(' & ')
+          for (const edge of edgesLocal){
+            edges.splice(edges.findIndex(e => edge === e), 1)
+          }
+          edges.push({
+            from: nodeFrom,
+            to: node,
+            type: unitedType
+          })
+        }
+      }
+    })
   }
 }

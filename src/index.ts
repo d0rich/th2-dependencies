@@ -8,6 +8,7 @@ async function main(){
   const { repos, depNodes, depEdges,
     dockerUsageMap, reposTypesMap } = await parse()
   postProcessFunctions.commonLibraries(depNodes, depEdges)
+  postProcessFunctions.unitedDependencies(depNodes, depEdges)
   const { allEdges, allNodes } = renderFunctions.filter({ allNodes: depNodes, allEdges: depEdges }, { repos })
   const plantUml = build(allNodes, allEdges)
   await render(plantUml)
