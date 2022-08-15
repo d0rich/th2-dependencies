@@ -4,7 +4,7 @@ import { Octokit, App } from "octokit"
 import axios from 'axios'
 import ProgressBar from 'progress'
 import { IGradleDependency } from './types/gradleDependencies'
-import { IDepNode, Th2RepoType } from './types/dependenciesGraph'
+import { IDepNode, Th2RepoType, IDepEdge } from './types/dependenciesGraph'
 import { IPythonDependency } from './types/pythonDependencies'
 import { Repositories } from './types/github'
 import { parseFunctions } from './custom'
@@ -26,7 +26,6 @@ export async  function parse(){
   const commitsCounts = new Map<string, number>()
   const dockerUsageMap = new Map<string, boolean>()
   const reposTypesMap = new Map<string, Th2RepoType>()
-  const reposDepandencies = new Map<string, IDepNode[]>()
   for (let i = 0; i * REPOS_PER_PAGE < th2Net.data.public_repos; i ++) {
     repos.push(...(await octokit.rest.repos.listForOrg({ org: 'th2-net', per_page: REPOS_PER_PAGE, page: i + 1})).data)
   }
@@ -97,14 +96,28 @@ export async  function parse(){
   })
   await Promise.all(promises)
 
+  // Create nodes
+
+  const depNodes: IDepNode[] = filteredRepos.map(repo => ({
+    name: repo.name,
+    docker: dockerUsageMap.get(repo.name) || false,
+    type: reposTypesMap.get(repo.name) || 'jar'
+  }))
+
+  const reposNodes: IDepNode[] = depNodes.filter(() => true)
+
   //Get dependencies
+
+  const depEdges: IDepEdge[] = []
 
   progressBar = new ProgressBar('Getting dependencies [:bar] :repo', {
     total: filteredRepos.length,
     width: 20
   })
   promises = filteredRepos.map(async repo => {
-    const dependencies: IDepNode[] = []
+    const dependencies: IDepEdge[] = []
+    const node: IDepNode | undefined = reposNodes.find(repoNode => repoNode.name === repo.name)
+    if (!node) return
     try {
       const gradleBuildFile = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/build.gradle`)
       const parsedGradleBuildFile: { dependencies: IGradleDependency[] } = await g2js.parseText(gradleBuildFile.data)
@@ -115,7 +128,21 @@ export async  function parse(){
           type: 'jar',
           docker: false
           }))
-        dependencies.push(...gradleDependencies)
+      for (let i = 0; i < gradleDependencies.length; i++) {
+        const dep = gradleDependencies[i]
+        const existingNode = depNodes.find(node => node.name === dep.name && (node.type === 'jar' || node.type === 'jar & py'))
+        if (!existingNode)
+          depNodes.push(dep)
+        else
+          gradleDependencies[i] = existingNode
+      }
+      dependencies.push(...gradleDependencies.map((dep): IDepEdge => {
+        return {
+          from: dep,
+          to: node,
+          type: 'jar'
+        }
+      }))
       
     }
     catch(e){}
@@ -147,34 +174,33 @@ export async  function parse(){
           docker: false,
           type: 'py'
         }))
-      dependencies.push(...parsedRequirements)
+      for (let i = 0; i < parsedRequirements.length; i++) {
+        const dep = parsedRequirements[i]
+        const existingNode = depNodes.find(node => node.name === dep.name && (node.type === 'py' || node.type === 'jar & py'))
+        if (!existingNode)
+          depNodes.push(dep)
+        else
+          parsedRequirements[i] = existingNode
+      }
+      dependencies.push(...parsedRequirements.map((dep): IDepEdge => {
+        return {
+          from: dep,
+          to: node,
+          type: 'py'
+        }
+      }))
     }
     catch(e){}
     
-    reposDepandencies.set(repo.name, dependencies)
+    depEdges.push(...dependencies)
     progressBar.tick({
       repo: repo.name
     })
   })
   await Promise.all(promises)
 
-  const depNodes: IDepNode[] = filteredRepos.map(repo => ({
-    name: repo.name,
-    docker: dockerUsageMap.get(repo.name) || false,
-    type: reposTypesMap.get(repo.name) || 'jar'
-  }))
-
-  for (const [repoName, dependencies] of reposDepandencies) {
-    for (let i = 0; i < dependencies.length; i++){
-      const depNodeIndex = depNodes.findIndex(dep => dep.name === dependencies[i].name)
-      if (depNodeIndex > -1) {
-        dependencies[i] = depNodes[depNodeIndex]
-      }
-    }
-  }
-
   return {
-    repos: filteredRepos, depNodes,
-    dockerUsageMap, reposTypesMap, reposDepandencies
+    repos: filteredRepos, depNodes, depEdges,
+    dockerUsageMap, reposTypesMap
   }
 }

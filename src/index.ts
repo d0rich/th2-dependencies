@@ -5,31 +5,10 @@ import { render } from './render'
 import { IDepEdge, IDepNode } from './types/dependenciesGraph'
 
 async function main(){
-  const { repos, depNodes, reposDepandencies,
+  const { repos, depNodes, depEdges,
     dockerUsageMap, reposTypesMap } = await parse()
-  const allNodes: IDepNode[] = [...depNodes]
-  for (const [repoName, dependencies] of reposDepandencies) {
-    for(const dep of dependencies) {
-      if (!allNodes.includes(dep)) allNodes.push(dep)
-    }
-  }
-  const allEdges: IDepEdge[] = []
-  for (const [repoName, dependencies] of reposDepandencies) {
-    const node = allNodes.find(node => node.name === repoName)
-    if(node) {
-      for(const dep of dependencies) {
-      allEdges.push({
-        from: dep,
-        to: node,
-        type: node.type
-      })
-    }
-    }
-    
-  }
-
-  const { allEdges: filteredEdges, allNodes: filteredNodes } = renderFunctions.filter({ allNodes, allEdges }, { repos })
-  const plantUml = build(filteredNodes, filteredEdges)
+  const { allEdges, allNodes } = renderFunctions.filter({ allNodes: depNodes, allEdges: depEdges }, { repos })
+  const plantUml = build(allNodes, allEdges)
   await render(plantUml)
 }
 
