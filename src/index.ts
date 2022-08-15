@@ -10,7 +10,7 @@ async function main(){
   postProcessFunctions.commonLibraries(depNodes, depEdges)
   postProcessFunctions.unitedDependencies(depNodes, depEdges)
   const { allEdges, allNodes } = renderFunctions.filter({ allNodes: depNodes, allEdges: depEdges }, { repos })
-  const plantUml = build(allNodes, allEdges, {lineType: 'curve'})
+  const plantUml = build(allNodes, allEdges, {lineType: 'polyline'})
   await render(plantUml)
 }
 
