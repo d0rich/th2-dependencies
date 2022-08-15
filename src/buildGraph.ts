@@ -1,6 +1,7 @@
 import nodeTest from "node:test";
 import { renderFunctions } from "./custom";
 import { IDepEdge, IDepNode, Th2RepoType } from "./types/dependenciesGraph";
+import { DiagramOptions } from "./types/plantuml";
 
 const stylesMap = new Map<Th2RepoType, string>()
 stylesMap.set("jar", '#fccaa7')
@@ -9,9 +10,9 @@ stylesMap.set('jar & py', '#a0cdfa')
 stylesMap.set('js', '#9ffcc8')
 stylesMap.set('undefined', '#d7d7d7')
 
-export function build(nodes: IDepNode[], edges: IDepEdge[]){
+export function build(nodes: IDepNode[], edges: IDepEdge[], options: DiagramOptions = { lineType: 'curve' }){
   const plantUml: string[] = ['@startuml']
-  plantUml.push(...applyStyle())
+  plantUml.push(...applyStyle(options))
   for(const node of nodes){
     plantUml.push(renderNode(node))
   }
@@ -22,10 +23,10 @@ export function build(nodes: IDepNode[], edges: IDepEdge[]){
   return plantUml.join('\n')
 }
 
-function applyStyle(){
+function applyStyle(options: DiagramOptions){
   return [
     'left to right direction',
-    'skinparam linetype polyline',
+    `skinparam linetype ${options.lineType}`,
     `sprite $docker [48x48/16] {
 000000000000000000000000000000000000000000000000
 000000000000000000000000000000000000000000000000
