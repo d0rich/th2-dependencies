@@ -90,14 +90,24 @@ function applyStyle(options: DiagramOptions){
 }
 
 function applyLegend(){
-  const legend: string[] = []
-  legend.push('legend top left')
-  legend.push('|= |= Type |')
-  for (const [repoType, style] of stylesMap) {
-    legend.push(`|<back:${style}>   </back>| ${repoType} Artifacts |`)
-  }
-  legend.push('endlegend')
-  return legend
+  const legendExamples: IDepNode[] = [
+    {name: 'Java/Kotlin artifacts', docker: false, type: 'jar'},
+    {name: 'Python artifacts', docker: false, type: 'py'},
+    {name: 'Java/Kotlin & Python artifacts', docker: false, type: 'jar & py'},
+    {name: 'JavaScript artifacts', docker: false, type: 'js'},
+    {name: 'JavaScript artifacts', docker: false, type: 'js'},
+    {name: 'Artifacts type is not supported by generator', docker: false, type: 'undefined'},
+    {name: 'Artifact has Docker image', docker: true, type: 'undefined'},
+  ]
+  return renderGroup('Legend', legendExamples, [])
+  // const legend: string[] = []
+  // legend.push('legend top left')
+  // legend.push('|= |= Type |')
+  // for (const [repoType, style] of stylesMap) {
+  //   legend.push(`|<back:${style}>   </back>| ${repoType} Artifacts |`)
+  // }
+  // legend.push('endlegend')
+  // return legend
 }
 
 function deleteUnsupportedSymbols(name: string){
@@ -105,7 +115,7 @@ function deleteUnsupportedSymbols(name: string){
 }
 
 function plantifyName(name: string){
-  return deleteUnsupportedSymbols(name.replace(/[-\.:${}() ]/g, ''))
+  return deleteUnsupportedSymbols(name.replace(/[-\.:${}() \/\n&]/g, ''))
 }
 
 function renderNode(node: IDepNode){
