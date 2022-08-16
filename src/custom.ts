@@ -22,6 +22,8 @@ export const renderFunctions = {
     groupsMap.set('th2-act', allNodes.filter(node => node.name.startsWith('th2-act')))
     const coreBoxes = [ 'th2-estore', 'th2-mstore', 'th2-rpt-data-provider', 'th2-rpt-viewer' ]
     groupsMap.set('core', allNodes.filter(node => coreBoxes.includes(node.name)))
+    const scriptUtils = [ 'th2-common-utils-py', 'th2-data-services', 'th2-data-services-utils', 'th2-common-py' ]
+    groupsMap.set('Python Script Utils', allNodes.filter(node => scriptUtils.includes(node.name)))
     return groupsMap
   },
   renderArrow(edge: IDepEdge) {
