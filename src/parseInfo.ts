@@ -9,6 +9,7 @@ import { IPythonDependency } from './types/pythonDependencies'
 import { Repositories } from './types/github'
 import { parseFunctions } from './custom'
 const g2js = require('gradle-to-js/lib/parser')
+const toml = require('toml');
 let progressBar: ProgressBar
 let promises: Promise<any>[]
 
@@ -79,6 +80,10 @@ export async  function parse(){
       if (requirementsTxt) platformsFlags.py = true
     } catch (e) {}
     try {
+      const { data: requirementsTxt } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/pyproject.toml`)
+      if (requirementsTxt) platformsFlags.py = true
+    } catch (e) {}
+    try {
       const { data: gradleBuild } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/build.gradle`)
       if (gradleBuild) platformsFlags.jar = true
     } catch (e) {}
@@ -115,10 +120,32 @@ export async  function parse(){
     total: filteredRepos.length,
     width: 20
   })
+
   promises = filteredRepos.map(async repo => {
     const dependencies: IDepEdge[] = []
+
+    
     const node: IDepNode | undefined = reposNodes.find(repoNode => repoNode.name === repo.name)
     if (!node) return
+
+    const includeDependencies = (newDependencies: IDepNode[], options: { type: Th2RepoType }) => {
+      for (let i = 0; i < newDependencies.length; i++) {
+        const dep = newDependencies[i]
+        const existingNode = depNodes.find(node => node.name === dep.name && node.type.includes(options.type))
+        if (!existingNode)
+          depNodes.push(dep)
+        else
+          newDependencies[i] = existingNode
+      }
+      dependencies.push(...newDependencies.map((dep): IDepEdge => {
+        return {
+          from: dep,
+          to: node,
+          type: options.type
+        }
+      }))
+    }
+
     try {
       const gradleBuildFile = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/build.gradle`)
       const parsedGradleBuildFile: { dependencies: IGradleDependency[] } = await g2js.parseText(gradleBuildFile.data)
@@ -129,22 +156,7 @@ export async  function parse(){
           type: 'jar',
           docker: false
           }))
-      for (let i = 0; i < gradleDependencies.length; i++) {
-        const dep = gradleDependencies[i]
-        const existingNode = depNodes.find(node => node.name === dep.name && (node.type === 'jar' || node.type === 'jar & py'))
-        if (!existingNode)
-          depNodes.push(dep)
-        else
-          gradleDependencies[i] = existingNode
-      }
-      dependencies.push(...gradleDependencies.map((dep): IDepEdge => {
-        return {
-          from: dep,
-          to: node,
-          type: 'jar'
-        }
-      }))
-      
+      includeDependencies(gradleDependencies, { type: 'jar' })
     }
     catch(e){}
 
@@ -175,21 +187,22 @@ export async  function parse(){
           docker: false,
           type: 'py'
         }))
-      for (let i = 0; i < parsedRequirements.length; i++) {
-        const dep = parsedRequirements[i]
-        const existingNode = depNodes.find(node => node.name === dep.name && (node.type === 'py' || node.type === 'jar & py'))
-        if (!existingNode)
-          depNodes.push(dep)
-        else
-          parsedRequirements[i] = existingNode
-      }
-      dependencies.push(...parsedRequirements.map((dep): IDepEdge => {
-        return {
-          from: dep,
-          to: node,
-          type: 'py'
-        }
-      }))
+      includeDependencies(parsedRequirements, { type: 'py' })
+    }
+    catch(e){}
+
+    try {
+      const pyproject: { data: string } = await axios.get(`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/pyproject.toml`)
+      const parsedProject = toml.parse(pyproject.data)
+      const parsedRequirements: IDepNode[] = Object.keys(parsedProject.tool.poetry.dependencies)
+        .map((depName): IDepNode => {
+          return {
+            docker: false,
+            name: depName,
+            type: 'py'
+          }
+        })
+      includeDependencies(parsedRequirements, { type: 'py' })
     }
     catch(e){}
     

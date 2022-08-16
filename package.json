@@ -17,7 +17,8 @@
     "node-plantuml-latest": "^2.2.0",
     "octokit": "^2.0.5",
     "plantuml": "^0.0.1",
-    "progress": "^2.0.3"
+    "progress": "^2.0.3",
+    "toml": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.2",
