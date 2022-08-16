@@ -12,9 +12,19 @@ export const renderFunctions = {
                       .filter(edge => repos.some(repo => repo.name === edge.to.name))
     }
   },
+  group(allNodes: IDepNode[]): Map<string, IDepNode[]> {
+    const groupsMap = new Map<string, IDepNode[]>()
+    groupsMap.set('th2-infra', allNodes.filter(node => node.name.startsWith('th2-infra')))
+    groupsMap.set('connectors', allNodes.filter(node => node.name.startsWith('th2-conn')))
+    groupsMap.set('codecs', allNodes.filter(node => node.name.startsWith('th2-codec')))
+    groupsMap.set('th2-act', allNodes.filter(node => node.name.startsWith('th2-act')))
+    const coreBoxes = [ 'th2-estore', 'th2-mstore', 'th2-rpt-data-provider', 'th2-rpt-viewer' ]
+    groupsMap.set('core', allNodes.filter(node => coreBoxes.includes(node.name)))
+    return groupsMap
+  },
   renderArrow(edge: IDepEdge) {
     if (edge.from.name.startsWith('th2-common')) return '.u.>'
-    if (!edge.from.name.startsWith('th2')) return '....>'
+    if (!edge.from.name.startsWith('th2') && edge.from.name !== 'remotehand') return '....>'
   },
   renderArrowStyle(edge: IDepEdge) {
     if (edge.from.name.startsWith('th2-common')){
@@ -23,14 +33,14 @@ export const renderFunctions = {
     }
     if (edge.from.name === 'th2-grpc-common') return '#a0cdfa'
     if (edge.from.name === 'th2-sailfish-utils') return '#b0b0b0'
-    if (!edge.from.name.startsWith('th2')) return '#d7d7d7'
+    if (!edge.from.name.startsWith('th2') && edge.from.name !== 'remotehand') return '#d7d7d7'
   }
 }
 
 export const parseFunctions = {
   filterRepos(repos: Repositories, options: { commitsCounts: Map<string, number> }){
     return repos
-      .filter(repo => ![ '.github', 'th2-documentation', 'th2-infra', 'th2-bom' ].includes(repo.name))
+      .filter(repo => ![ '.github', 'th2-documentation', 'th2-infra', 'th2-bom', 'th2-net.github.io' ].includes(repo.name))
       .filter(repo => !repo.name.includes('demo'))
       .filter(repo => !repo.name.includes('test'))
       .filter(repo => (options.commitsCounts.get(repo.name) || 0) > 1)

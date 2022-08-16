@@ -12,8 +12,12 @@ stylesMap.set('undefined', '#d7d7d7')
 
 export function build(nodes: IDepNode[], edges: IDepEdge[], options: DiagramOptions = { lineType: 'curve' }){
   const plantUml: string[] = ['@startuml']
+  const groupsMap = renderFunctions.group(nodes)
   plantUml.push(...applyStyle(options))
   plantUml.push(...applyLegend())
+  for (const [groupName, nodesInGroup] of groupsMap) {
+    plantUml.push(...renderGroup(groupName, nodesInGroup, nodes))
+  }
   for(const node of nodes){
     plantUml.push(renderNode(node))
   }
@@ -118,4 +122,16 @@ function renderArrow(edge: IDepEdge) {
 
 function renderArrowStyle(edge: IDepEdge) {
   return renderFunctions.renderArrowStyle(edge) || ''
+}
+
+function renderGroup(name: string, nodes: IDepNode[], allNodes: IDepNode[]) {
+  const group: string[] = []
+  group.push(`package "${name}" {`)
+  for (const node of nodes) {
+    group.push(`  ${renderNode(node)}`)
+    const nodeIndex = allNodes.findIndex(n => n === node)
+    if (nodeIndex > -1) allNodes.splice(nodeIndex, 1)
+  }
+  group.push('}')
+  return group
 }
