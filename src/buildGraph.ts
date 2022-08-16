@@ -119,11 +119,16 @@ function plantifyName(name: string){
 }
 
 function renderNode(node: IDepNode){
-  return `agent "${node.docker ? '<$docker> ': ''}${deleteUnsupportedSymbols(node.name)}" as ${plantifyName(node.name)} ${stylesMap.get(node.type) || ''}`
+  const nodeName = plantifyName(node.name)
+  if (!nodeName) return ''
+  return `agent "${node.docker ? '<$docker> ': ''}${deleteUnsupportedSymbols(node.name)}" as ${nodeName} ${stylesMap.get(node.type) || ''}`
 }
 
 function renderEdge(edge: IDepEdge) {
-  return `${plantifyName(edge.from.name)} ${renderArrow(edge)} ${plantifyName(edge.to.name)} ${renderArrowStyle(edge)}: ${edge.type}`
+  const fromName = plantifyName(edge.from.name)
+  const toName = plantifyName(edge.to.name)
+  if (!(fromName && toName)) return ''
+  return `${fromName} ${renderArrow(edge)} ${toName} ${renderArrowStyle(edge)}: ${edge.type}`
 }
 
 function renderArrow(edge: IDepEdge) {
