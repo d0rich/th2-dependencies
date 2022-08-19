@@ -9,7 +9,7 @@ async function main(options: { includeExternal: boolean, lineType: LineType }){
   const { repos, depNodes, depEdges,
     dockerUsageMap, reposTypesMap } = await parse()
   console.log('Applying custom rules...')
-  postProcessFunctions.commonLibraries(depNodes, depEdges)
+  //postProcessFunctions.commonLibraries(depNodes, depEdges)
   postProcessFunctions.th2Sources(depNodes, depEdges)
   postProcessFunctions.storesCommon(depNodes, depEdges)
   postProcessFunctions.sailfish(depNodes, depEdges)

@@ -131,7 +131,7 @@ export async  function parse(){
     const includeDependencies = (newDependencies: IDepNode[], options: { type: Th2RepoType }) => {
       for (let i = 0; i < newDependencies.length; i++) {
         const dep = newDependencies[i]
-        const existingNode = depNodes.find(node => node.name === dep.name && node.type.includes(options.type))
+        const existingNode = depNodes.find(node => (node.name === dep.name || (node.name.includes(dep.name) && ((options.type === 'jar' && node.name.endsWith('-j')) || (options.type === 'py' && node.name.endsWith('-py'))) )) && node.type.includes(options.type))
         if (!existingNode)
           depNodes.push(dep)
         else
