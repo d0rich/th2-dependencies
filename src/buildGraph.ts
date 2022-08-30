@@ -11,6 +11,8 @@ stylesMap.set('js', '#9ffcc8')
 stylesMap.set('undefined', '#d7d7d7')
 
 export function build(nodes: IDepNode[], edges: IDepEdge[], options: DiagramOptions = { lineType: 'curve' }){
+  nodes.sort()
+  edges.sort()
   const plantUml: string[] = ['@startuml']
   const groupsMap = renderFunctions.group(nodes)
   plantUml.push(...applyStyle(options))
