@@ -11,8 +11,17 @@ stylesMap.set('js', '#9ffcc8')
 stylesMap.set('undefined', '#d7d7d7')
 
 export function build(nodes: IDepNode[], edges: IDepEdge[], options: DiagramOptions = { lineType: 'curve' }){
-  nodes.sort()
-  edges.sort()
+  nodes.sort((a, b) => {
+    if (a.name > b.name) return 1
+    if (a.name < b.name) return -1
+    return 0
+  })
+  edges.sort((a, b) => {
+    const getName = (edge: IDepEdge): string => `${edge.from.name} -> ${edge.to.name}`
+    if (getName(a) > getName(b)) return 1
+    if (getName(a) < getName(b)) return -1
+    return 0
+  })
   const plantUml: string[] = ['@startuml']
   const groupsMap = renderFunctions.group(nodes)
   plantUml.push(...applyStyle(options))
