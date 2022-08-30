@@ -1,0 +1,318 @@
+@startuml
+left to right direction
+skinparam linetype curve
+skinparam ArrowColor #212121
+skinparam AgentBorderColor #212121
+skinparam roundCorner 10
+sprite $docker [48x48/16] {
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000015555100000000000000000000
+00000000000000000000005A889500000000000000000000
+000000000000000000000058887500000000000000000000
+000000000000000000000058887500000000000000000000
+0000000000000006666666A9778500000000010000000000
+000000000000001B766B66797785000000001C9000000000
+000000000000001B876B8878887500000000635700000000
+000000000000001B876B8878887500000000A00920000000
+000000000008889C888B889A889B88810000A00382420000
+00000000000B445A545A55685576669300009100B768B400
+00000000000A777A876B8879887798A30000470000008200
+00000000000A777A876B8879887798A300004D0000196000
+00000002888D888C888C889B88AA88BA99BA6009A9930000
+000000055211111111111111111111111000004800000000
+00001505400200000002500000060000000110A000600000
+0005CFDCA9CFD86568BFFC8668EFFB86569EFBC89EFA3000
+0000000391111111111111111111111111111B0000001000
+00000000B000000000000000000000000000930000000000
+000000008300000001560000000000000007600000000000
+000000001B00000012430000000000000077000000000000
+0000000006B8889982000000000000000960000000000000
+00000000007500000000000000000003B400000000000000
+000000000007800000000000000002A80000000000000000
+0000000000003A61000000000027B8100000000000000000
+0000000000000049A8655679AB8400000000000000000000
+000000000000000000345431000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+}
+package "Legend" {
+  agent "Java/Kotlin artifacts" as JavaKotlinartifacts #fccaa7
+  agent "Python artifacts" as Pythonartifacts #ffeb94
+  agent "Java/Kotlin & Python artifacts" as JavaKotlinPythonartifacts #a0cdfa
+  agent "JavaScript artifacts" as JavaScriptartifacts #9ffcc8
+  agent "JavaScript artifacts" as JavaScriptartifacts #9ffcc8
+  agent "Artifacts type is not supported by generator" as Artifactstypeisnotsupportedbygenerator #d7d7d7
+  agent "<$docker> Artifact has Docker image" as ArtifacthasDockerimage #d7d7d7
+}
+package "th2-infra" {
+  agent "<$docker> th2-infra-editor" as th2infraeditor #9ffcc8
+  agent "<$docker> th2-infra-operator" as th2infraoperator #fccaa7
+  agent "<$docker> th2-infra-mgr" as th2inframgr #fccaa7
+  agent "th2-infra-repo" as th2infrarepo #fccaa7
+  agent "<$docker> th2-infra-editor-v2" as th2infraeditorv2 #9ffcc8
+}
+package "connectors" {
+  agent "<$docker> th2-conn" as th2conn #fccaa7
+  agent "th2-conn-generic" as th2conngeneric #fccaa7
+  agent "<$docker> th2-conn-http-client" as th2connhttpclient #fccaa7
+  agent "<$docker> th2-conn-ws-client" as th2connwsclient #fccaa7
+  agent "<$docker> th2-conn-http-server" as th2connhttpserver #fccaa7
+  agent "<$docker> th2-conn-qfj" as th2connqfj #fccaa7
+  agent "<$docker> th2-conn-http-ws-client-template" as th2connhttpwsclienttemplate #fccaa7
+  agent "<$docker> th2-conn-kafka" as th2connkafka #fccaa7
+  agent "th2-conn-dirty-tcp-core" as th2conndirtytcpcore #fccaa7
+}
+package "codecs" {
+  agent "th2-codec" as th2codec #fccaa7
+  agent "th2-codec-generic" as th2codecgeneric #fccaa7
+  agent "<$docker> th2-codec-csv" as th2codeccsv #fccaa7
+  agent "<$docker> th2-codec-hand-html" as th2codechandhtml #fccaa7
+  agent "<$docker> th2-codec-hand" as th2codechand #fccaa7
+  agent "<$docker> th2-codec-sailfish" as th2codecsailfish #fccaa7
+  agent "<$docker> th2-codec-html" as th2codechtml #fccaa7
+  agent "<$docker> th2-codec-http" as th2codechttp #fccaa7
+  agent "<$docker> th2-codec-json" as th2codecjson #fccaa7
+  agent "<$docker> th2-codec-xml" as th2codecxml #fccaa7
+  agent "<$docker> th2-codec-moldudp64" as th2codecmoldudp64 #fccaa7
+  agent "<$docker> th2-codec-xml-via-xsd" as th2codecxmlviaxsd #fccaa7
+  agent "<$docker> th2-codec-open-api" as th2codecopenapi #fccaa7
+  agent "<$docker> th2-codec-fix-orchestra" as th2codecfixorchestra #fccaa7
+  agent "<$docker> th2-codec-json-dictionaryless" as th2codecjsondictionaryless #fccaa7
+}
+package "th2-act" {
+  agent "<$docker> th2-act-template-j" as th2acttemplatej #fccaa7
+  agent "th2-act-gui-core" as th2actguicore #fccaa7
+  agent "<$docker> th2-act-ui-backend" as th2actuibackend #fccaa7
+  agent "<$docker> th2-act-ui" as th2actui #9ffcc8
+  agent "<$docker> th2-act-ssh" as th2actssh #fccaa7
+  agent "th2-act-core-j" as th2actcorej #fccaa7
+}
+package "core" {
+  agent "<$docker> th2-mstore" as th2mstore #fccaa7
+  agent "<$docker> th2-estore" as th2estore #fccaa7
+  agent "<$docker> th2-rpt-viewer" as th2rptviewer #9ffcc8
+  agent "<$docker> th2-rpt-data-provider" as th2rptdataprovider #fccaa7
+}
+package "Python Script Utils" {
+  agent "th2-common-py" as th2commonpy #ffeb94
+  agent "th2-data-services" as th2dataservices #ffeb94
+  agent "th2-data-services-utils" as th2dataservicesutils #ffeb94
+  agent "th2-common-utils-py" as th2commonutilspy #ffeb94
+}
+agent "th2-bom" as th2bom #fccaa7
+agent "th2-grpc-service-generator" as th2grpcservicegenerator #fccaa7
+agent "<$docker> th2-python-service-generator" as th2pythonservicegenerator #fccaa7
+agent "cradleapi" as cradleapi #fccaa7
+agent "th2-grpc-common" as th2grpccommon #a0cdfa
+agent "th2-common-j" as th2commonj #fccaa7
+agent "th2-grpc-check1" as th2grpccheck1 #a0cdfa
+agent "th2-store-common" as th2storecommon #fccaa7
+agent "th2-grpc-util" as th2grpcutil #a0cdfa
+agent "th2-grpc-act-template" as th2grpcacttemplate #a0cdfa
+agent "th2-grpc-generator-template" as th2grpcgeneratortemplate #a0cdfa
+agent "th2-grpc-sim" as th2grpcsim #a0cdfa
+agent "th2-grpc-hand" as th2grpchand #a0cdfa
+agent "th2-sim" as th2sim #fccaa7
+agent "th2-sailfish-utils" as th2sailfishutils #fccaa7
+agent "<$docker> th2-util" as th2util #fccaa7
+agent "<$docker> th2-read-log" as th2readlog #fccaa7
+agent "<$docker> th2-check1" as th2check1 #fccaa7
+agent "th2-check2-recon" as th2check2recon #ffeb94
+agent "<$docker> th2-check2-recon-template" as th2check2recontemplate #ffeb94
+agent "th2-grpc-sim-template" as th2grpcsimtemplate #a0cdfa
+agent "<$docker> th2-sim-template" as th2simtemplate #fccaa7
+agent "<$docker> th2-read-csv" as th2readcsv #fccaa7
+agent "<$docker> th2-hand" as th2hand #fccaa7
+agent "remotehand" as remotehand #fccaa7
+agent "th2-common-cpp" as th2commoncpp #d7d7d7
+agent "th2-box-descriptor-generator" as th2boxdescriptorgenerator #fccaa7
+agent "infra-operator-tpl" as infraoperatortpl #d7d7d7
+agent "th2-grpc-check2-recon" as th2grpccheck2recon #a0cdfa
+agent "th2-woodpecker" as th2woodpecker #fccaa7
+agent "th2-grpc-woodpecker" as th2grpcwoodpecker #a0cdfa
+agent "th2-read-file-common-core" as th2readfilecommoncore #fccaa7
+agent "<$docker> th2-woodpecker-template" as th2woodpeckertemplate #fccaa7
+agent "th2-grpc-data-provider" as th2grpcdataprovider #a0cdfa
+agent "th2-grpc-crawler-data-processor" as th2grpccrawlerdataprocessor #a0cdfa
+agent "<$docker> th2-read-file" as th2readfile #fccaa7
+agent "th2-replay-script-generator-core" as th2replayscriptgeneratorcore #fccaa7
+agent "<$docker> th2-data-processor-zephyr" as th2dataprocessorzephyr #fccaa7
+agent "th2-grpc-conn" as th2grpcconn #a0cdfa
+agent "<$docker> th2-crawler" as th2crawler #fccaa7
+agent "th2-lib-fix-util-j" as th2libfixutilj #fccaa7
+agent "th2-lib-template-j" as th2libtemplatej #fccaa7
+agent "<$docker> th2-crawler-event-healer" as th2crawlereventhealer #fccaa7
+agent "<$docker> th2-lw-data-provider" as th2lwdataprovider #fccaa7
+agent "th2-grpc-act-ssh" as th2grpcactssh #a0cdfa
+agent "th2-grpc-codec" as th2grpccodec #a0cdfa
+agent "<$docker> th2-rdp-profiler" as th2rdpprofiler #9ffcc8
+agent "<$docker> th2-key-value-storage" as th2keyvaluestorage #fccaa7
+agent "th2-schema-validator" as th2schemavalidator #fccaa7
+agent "<$docker> provider_call" as provider_call #fccaa7
+agent "<$docker> th2-cr-converter" as th2crconverter #fccaa7
+agent "th2-task-utils" as th2taskutils #fccaa7
+agent "th2-netty-bytebuf-utils" as th2nettybytebufutils #fccaa7
+agent "th2-grpc-books-validation" as th2grpcbooksvalidation #a0cdfa
+agent "sailfish-common" as sailfishcommon #fccaa7
+agent "sailfish-core" as sailfishcore #fccaa7
+agent "sailfish-service" as sailfishservice #fccaa7
+th2commonj .u.> th2estore #fccaa7: jar
+th2commonj .u.> th2storecommon #fccaa7: jar
+th2grpccommon ..> th2storecommon #a0cdfa: jar
+th2commonj .u.> th2mstore #fccaa7: jar
+th2commonj .u.> th2readcsv #fccaa7: jar
+th2readfilecommoncore ..> th2readcsv : jar
+th2commonj .u.> th2codechandhtml #fccaa7: jar
+sailfishcommon ..> th2codechandhtml #d7d7d7: jar
+th2grpccommon ..> th2commonj #a0cdfa: jar
+th2commonj .u.> th2acttemplatej #fccaa7: jar
+th2grpcacttemplate ..> th2acttemplatej : jar
+th2grpccheck1 ..> th2acttemplatej : jar
+th2commonj .u.> th2rptdataprovider #fccaa7: jar
+th2grpcdataprovider ..> th2rptdataprovider : jar
+th2commonj .u.> th2codeccsv #fccaa7: jar
+th2commonj .u.> th2conn #fccaa7: jar
+th2sailfishutils ..> th2conn #b0b0b0: jar
+th2check2recon ..> th2check2recontemplate : py
+th2commonj .u.> th2codecsailfish #fccaa7: jar
+th2sailfishutils ..> th2codecsailfish #b0b0b0: jar
+th2grpccheck1 ..> th2check1 : jar
+th2commonj .u.> th2check1 #fccaa7: jar
+th2sailfishutils ..> th2check1 #b0b0b0: jar
+th2sim ..> th2simtemplate : jar
+th2commonj .u.> th2simtemplate #fccaa7: jar
+th2grpcsimtemplate ..> th2simtemplate : jar
+th2grpccommon ..> th2grpccodec #a0cdfa: py
+th2grpccommon ..> th2codec #a0cdfa: jar
+th2commonj .u.> th2codec #fccaa7: jar
+th2commonj .u.> th2codechttp #fccaa7: jar
+th2codec ..> th2codechttp : jar
+th2commonj .u.> th2replayscriptgeneratorcore #fccaa7: jar
+th2grpccommon ..> th2commonpy #a0cdfa: py
+th2commonutilspy .u.> th2commonpy #ffeb94: py
+th2grpcutil ..> th2check2recon : py
+th2commonpy .u.> th2check2recon #ffeb94: py
+th2grpccrawlerdataprocessor ..> th2check2recon : py
+th2commonj .u.> th2woodpeckertemplate #fccaa7: jar
+th2woodpecker ..> th2woodpeckertemplate : jar
+th2grpccommon ..> th2libfixutilj #a0cdfa: jar
+th2commonj .u.> th2readlog #fccaa7: jar
+th2readfilecommoncore ..> th2readlog : jar
+th2commonj .u.> th2actcorej #fccaa7: jar
+th2grpccheck1 ..> th2actcorej : jar
+remotehand ..> th2hand : jar
+th2grpccommon ..> th2hand #a0cdfa: jar
+th2commonj .u.> th2hand #fccaa7: jar
+th2commonj .u.> th2crawler #fccaa7: jar
+th2commonj .u.> provider_call #fccaa7: jar
+th2grpcdataprovider ..> provider_call : jar
+th2commonj .u.> th2codecjson #fccaa7: jar
+th2codec ..> th2codecjson : jar
+th2sailfishutils ..> th2codecjson #b0b0b0: jar
+th2commonj .u.> th2connhttpwsclienttemplate #fccaa7: jar
+th2grpcconn ..> th2connhttpwsclienttemplate : jar
+th2connwsclient ..> th2connhttpwsclienttemplate : jar
+th2connhttpclient ..> th2connhttpwsclienttemplate : jar
+th2codec ..> th2codecopenapi : jar
+th2commonj .u.> th2codecxml #fccaa7: jar
+th2codec ..> th2codecxml : jar
+th2sailfishutils ..> th2codecxml #b0b0b0: jar
+th2grpccommon ..> th2readfilecommoncore #a0cdfa: jar
+th2grpcdataprovider ..> th2dataservices : py
+th2commonj .u.> th2codechtml #fccaa7: jar
+sailfishcommon ..> th2codechtml #d7d7d7: jar
+th2commonj .u.> th2connhttpserver #fccaa7: jar
+th2commonj .u.> th2crawlereventhealer #fccaa7: jar
+th2grpccrawlerdataprocessor ..> th2crawlereventhealer : jar
+th2commonj .u.> th2actguicore #fccaa7: jar
+th2grpccommon ..> th2actguicore #a0cdfa: jar
+th2grpchand ..> th2actguicore : jar
+th2commonj .u.> th2codecxmlviaxsd #fccaa7: jar
+th2codec ..> th2codecxmlviaxsd : jar
+th2sailfishutils ..> th2codecxmlviaxsd #b0b0b0: jar
+th2grpccommon ..> th2actuibackend #a0cdfa: jar
+th2commonj .u.> th2actuibackend #fccaa7: jar
+th2grpcacttemplate ..> th2actuibackend : jar
+sailfishcore ..> th2actuibackend #d7d7d7: jar
+th2grpccommon ..> th2commonutilspy #a0cdfa: py
+th2commonj .u.> th2codecfixorchestra #fccaa7: jar
+th2codec ..> th2codecfixorchestra : jar
+th2commonj .u.> th2connqfj #fccaa7: jar
+th2grpcconn ..> th2connqfj : jar
+th2commonj .u.> th2codecmoldudp64 #fccaa7: jar
+th2codec ..> th2codecmoldudp64 : jar
+th2commonj .u.> th2actssh #fccaa7: jar
+th2grpcactssh ..> th2actssh : jar
+th2grpcsim ..> th2sim : jar
+th2commonj .u.> th2readfile #fccaa7: jar
+th2readfilecommoncore ..> th2readfile : jar
+th2commonj .u.> th2codechand #fccaa7: jar
+sailfishcommon ..> th2codechand #d7d7d7: jar
+th2commonj .u.> th2woodpecker #fccaa7: jar
+th2grpcwoodpecker ..> th2woodpecker : jar
+th2grpccommon ..> th2libtemplatej #a0cdfa: jar
+th2commonj .u.> th2lwdataprovider #fccaa7: jar
+th2grpcdataprovider ..> th2lwdataprovider : jar
+th2commonj .u.> th2conndirtytcpcore #fccaa7: jar
+th2grpcconn ..> th2conndirtytcpcore : jar
+th2commonj .u.> th2connkafka #fccaa7: jar
+th2commonj .u.> th2dataprocessorzephyr #fccaa7: jar
+th2grpccrawlerdataprocessor ..> th2dataprocessorzephyr : jar
+th2commonj .u.> th2codecjsondictionaryless #fccaa7: jar
+th2codec ..> th2codecjsondictionaryless : jar
+th2commonj .u.> th2keyvaluestorage #fccaa7: jar
+th2commonj .u.> th2sailfishutils #fccaa7: jar
+th2commonj .u.> th2connhttpclient #fccaa7: jar
+th2commonj .u.> th2util #fccaa7: jar
+th2sailfishutils ..> th2util #b0b0b0: jar
+th2grpcutil ..> th2util : jar
+th2commonj .u.> th2connwsclient #fccaa7: jar
+th2grpcconn ..> th2connwsclient : jar
+th2bom ..> th2grpcservicegenerator : jar
+th2bom ..> th2grpccommon : jar
+th2bom ..> th2grpcgeneratortemplate : jar
+th2grpcservicegenerator ..> th2grpccommon : Gradle plugin
+th2grpcgeneratortemplate ..> th2grpccommon : Git fork
+th2pythonservicegenerator ..> th2grpcgeneratortemplate : docker image for build
+th2storecommon ..> th2estore : jar
+th2storecommon ..> th2mstore : jar
+sailfishcommon ..> sailfishcore #d7d7d7: jar
+sailfishcore ..> th2sailfishutils #d7d7d7: jar
+sailfishcore ..> sailfishservice #d7d7d7: jar
+sailfishservice ..> th2codecgeneric #d7d7d7: jar
+sailfishservice ..> th2conngeneric #d7d7d7: jar
+th2conn ..> th2conngeneric : docker image base
+th2codec ..> th2codecgeneric : docker image base
+th2grpccommon ..> th2grpccheck1 #a0cdfa: jar & py
+th2grpccommon ..> th2grpcutil #a0cdfa: jar & py
+th2grpccommon ..> th2grpcacttemplate #a0cdfa: jar & py
+th2grpccommon ..> th2grpcsim #a0cdfa: jar & py
+th2grpccommon ..> th2grpchand #a0cdfa: jar & py
+th2grpcsim ..> th2grpcsimtemplate : jar & py
+th2grpccommon ..> th2grpccheck2recon #a0cdfa: jar & py
+th2grpccommon ..> th2grpcwoodpecker #a0cdfa: jar & py
+th2grpccommon ..> th2grpcdataprovider #a0cdfa: jar & py
+th2grpccommon ..> th2grpccrawlerdataprocessor #a0cdfa: jar & py
+th2grpcdataprovider ..> th2grpccrawlerdataprocessor : jar & py
+th2grpccommon ..> th2grpcconn #a0cdfa: jar & py
+th2grpccommon ..> th2grpcactssh #a0cdfa: jar & py
+@enduml

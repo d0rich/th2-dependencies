@@ -1,0 +1,20 @@
+name: Update dependencies graph
+on:
+  schedule: 
+    - cron: "0 0 * * *"
+jobs: 
+  update:
+    runs-on: ubuntu-latest
+    env: 
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+      - run: npm ci
+      - run: npm run generate
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Automated Change
