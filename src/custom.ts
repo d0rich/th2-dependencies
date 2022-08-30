@@ -116,7 +116,6 @@ export const postProcessFunctions = {
     const sailfishCommonNode = nodes.find(node => node.name === 'sailfish-common')
     const sailfishCoreNode = nodes.find(node => node.name === 'sailfish-core')
     const sailfishServiceNode: IDepNode = { name: 'sailfish-service', docker: false, type: 'jar' }
-    console.log(th2SailfishUtilsNode, sailfishCommonNode, sailfishCoreNode)
     if (!(th2SailfishUtilsNode && sailfishCommonNode && sailfishCoreNode)) return
     nodes.push(sailfishServiceNode)
     edges.push({from: sailfishCommonNode, to: sailfishCoreNode, type: 'jar'})
