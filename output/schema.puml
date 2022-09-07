@@ -133,6 +133,7 @@ agent "th2-check2-recon" as th2check2recon #ffeb94
 agent "<$docker> th2-check2-recon-template" as th2check2recontemplate #ffeb94
 agent "th2-common-cpp" as th2commoncpp #d7d7d7
 agent "th2-common-j" as th2commonj #fccaa7
+agent "th2-common-utils-j" as th2commonutilsj #fccaa7
 agent "<$docker> th2-cr-converter" as th2crconverter #fccaa7
 agent "<$docker> th2-crawler" as th2crawler #fccaa7
 agent "<$docker> th2-crawler-event-healer" as th2crawlereventhealer #fccaa7
@@ -251,6 +252,7 @@ th2commonj .u.> th2util #fccaa7: jar
 th2commonj .u.> th2woodpecker #fccaa7: jar
 th2commonj .u.> th2woodpeckertemplate #fccaa7: jar
 th2commonpy .u.> th2check2recon #ffeb94: py
+th2commonutilsj .u.> th2conndirtytcpcore #fccaa7: jar
 th2commonutilspy .u.> th2commonpy #ffeb94: py
 th2conn ..> th2conngeneric : docker image base
 th2conndirtytcpcore ..> th2conndirtyfix : jar
@@ -267,6 +269,7 @@ th2grpccommon ..> th2actuibackend #a0cdfa: jar
 th2grpccommon ..> th2codec #a0cdfa: jar
 th2grpccommon ..> th2commonj #a0cdfa: jar
 th2grpccommon ..> th2commonpy #a0cdfa: py
+th2grpccommon ..> th2commonutilsj #a0cdfa: jar
 th2grpccommon ..> th2commonutilspy #a0cdfa: py
 th2grpccommon ..> th2eventcachecollector #a0cdfa: jar
 th2grpccommon ..> th2grpcactssh #a0cdfa: jar & py
