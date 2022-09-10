@@ -5,6 +5,7 @@ This repository conains script, which analyses dependencies of repositories in [
 ## Relevant schema
 
 The output in this folder is updated every 24 hours. Last version is available [here](https://raw.githubusercontent.com/d0rich/th2-dependencies/master/output/schema.svg).
+![](output/schema.svg)
 
 ## Requirements
 
