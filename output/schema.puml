@@ -174,6 +174,7 @@ agent "<$docker> th2-read-log" as th2readlog #fccaa7
 agent "th2-replay-script-generator-core" as th2replayscriptgeneratorcore #fccaa7
 agent "th2-sailfish-utils" as th2sailfishutils #fccaa7
 agent "th2-schema-validator" as th2schemavalidator #fccaa7
+agent "th2-sense" as th2sense #fccaa7
 agent "th2-sim" as th2sim #fccaa7
 agent "<$docker> th2-sim-template" as th2simtemplate #fccaa7
 agent "th2-store-common" as th2storecommon #fccaa7
