@@ -292,7 +292,6 @@ th2grpccommon ..> th2libfixutilj #a0cdfa: jar
 th2grpccommon ..> th2libtemplatej #a0cdfa: jar
 th2grpccommon ..> th2readfilecommoncore #a0cdfa: jar
 th2grpccommon ..> th2storecommon #a0cdfa: jar
-th2grpcconn ..> th2conndirtytcpcore : jar
 th2grpcconn ..> th2connhttpwsclienttemplate : jar
 th2grpcconn ..> th2connqfj : jar
 th2grpcconn ..> th2connwsclient : jar
@@ -314,6 +313,7 @@ th2grpcsimtemplate ..> th2simtemplate : jar
 th2grpcutil ..> th2check2recon : py
 th2grpcutil ..> th2util : jar
 th2grpcwoodpecker ..> th2woodpecker : jar
+th2nettybytebufutils ..> th2conndirtytcpcore : jar
 th2pythonservicegenerator ..> th2grpcgeneratortemplate : docker image for build
 th2readfilecommoncore ..> th2readcsv : jar
 th2readfilecommoncore ..> th2readfile : jar
