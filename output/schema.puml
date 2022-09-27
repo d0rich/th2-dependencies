@@ -134,6 +134,7 @@ agent "th2-check2-recon" as th2check2recon #ffeb94
 agent "<$docker> th2-check2-recon-template" as th2check2recontemplate #ffeb94
 agent "th2-common-cpp" as th2commoncpp #d7d7d7
 agent "th2-common-j" as th2commonj #fccaa7
+agent "th2-common-ui-components" as th2commonuicomponents #9ffcc8
 agent "th2-common-utils-j" as th2commonutilsj #fccaa7
 agent "<$docker> th2-cr-converter" as th2crconverter #fccaa7
 agent "<$docker> th2-crawler" as th2crawler #fccaa7
@@ -172,6 +173,7 @@ agent "<$docker> th2-read-file" as th2readfile #fccaa7
 agent "th2-read-file-common-core" as th2readfilecommoncore #fccaa7
 agent "<$docker> th2-read-log" as th2readlog #fccaa7
 agent "th2-replay-script-generator-core" as th2replayscriptgeneratorcore #fccaa7
+agent "<$docker> th2-rpt-cache-reader" as th2rptcachereader #fccaa7
 agent "th2-sailfish-utils" as th2sailfishutils #fccaa7
 agent "th2-schema-validator" as th2schemavalidator #fccaa7
 agent "th2-sense" as th2sense #fccaa7
@@ -247,6 +249,7 @@ th2commonj .u.> th2readcsv #fccaa7: jar
 th2commonj .u.> th2readfile #fccaa7: jar
 th2commonj .u.> th2readlog #fccaa7: jar
 th2commonj .u.> th2replayscriptgeneratorcore #fccaa7: jar
+th2commonj .u.> th2rptcachereader #fccaa7: jar
 th2commonj .u.> th2rptdataprovider #fccaa7: jar
 th2commonj .u.> th2sailfishutils #fccaa7: jar
 th2commonj .u.> th2simtemplate #fccaa7: jar
