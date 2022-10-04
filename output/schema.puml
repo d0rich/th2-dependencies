@@ -101,6 +101,7 @@ package "codecs" {
 }
 package "th2-act" {
   agent "th2-act-core-j" as th2actcorej #fccaa7
+  agent "th2-act-core-py" as th2actcorepy #ffeb94
   agent "th2-act-gui-core" as th2actguicore #fccaa7
   agent "<$docker> th2-act-ssh" as th2actssh #fccaa7
   agent "<$docker> th2-act-template-j" as th2acttemplatej #fccaa7
@@ -120,7 +121,6 @@ package "Python Script Utils" {
   agent "th2-data-services-utils" as th2dataservicesutils #ffeb94
 }
 agent "cradleapi" as cradleapi #fccaa7
-agent "exactpro-template" as exactprotemplate #d7d7d7
 agent "infra-operator-tpl" as infraoperatortpl #d7d7d7
 agent "<$docker> provider_call" as provider_call #fccaa7
 agent "remotehand" as remotehand #fccaa7
@@ -257,6 +257,7 @@ th2commonj .u.> th2storecommon #fccaa7: jar
 th2commonj .u.> th2util #fccaa7: jar
 th2commonj .u.> th2woodpecker #fccaa7: jar
 th2commonj .u.> th2woodpeckertemplate #fccaa7: jar
+th2commonpy .u.> th2actcorepy #ffeb94: py
 th2commonpy .u.> th2check2recon #ffeb94: py
 th2commonutilsj .u.> th2conndirtytcpcore #fccaa7: jar
 th2commonutilspy .u.> th2commonpy #ffeb94: py
@@ -268,6 +269,7 @@ th2grpcactssh ..> th2actssh : jar
 th2grpcacttemplate ..> th2acttemplatej : jar
 th2grpcacttemplate ..> th2actuibackend : jar
 th2grpccheck1 ..> th2actcorej : jar
+th2grpccheck1 ..> th2actcorepy : py
 th2grpccheck1 ..> th2acttemplatej : jar
 th2grpccheck1 ..> th2check1 : jar
 th2grpccommon ..> th2actguicore #a0cdfa: jar
