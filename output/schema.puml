@@ -221,7 +221,6 @@ th2commonj .u.> th2codechand #fccaa7: jar
 th2commonj .u.> th2codechandhtml #fccaa7: jar
 th2commonj .u.> th2codechtml #fccaa7: jar
 th2commonj .u.> th2codechttp #fccaa7: jar
-th2commonj .u.> th2codecjson #fccaa7: jar
 th2commonj .u.> th2codecjsondictionaryless #fccaa7: jar
 th2commonj .u.> th2codecmoldudp64 #fccaa7: jar
 th2commonj .u.> th2codecsailfish #fccaa7: jar
@@ -324,6 +323,7 @@ th2readfilecommoncore ..> th2readcsv : jar
 th2readfilecommoncore ..> th2readfile : jar
 th2readfilecommoncore ..> th2readlog : jar
 th2sailfishutils ..> th2check1 #b0b0b0: jar
+th2sailfishutils ..> th2codechttp #b0b0b0: jar
 th2sailfishutils ..> th2codecjson #b0b0b0: jar
 th2sailfishutils ..> th2codecsailfish #b0b0b0: jar
 th2sailfishutils ..> th2codecxml #b0b0b0: jar
