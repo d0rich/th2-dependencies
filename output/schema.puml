@@ -184,6 +184,7 @@ agent "th2-task-utils" as th2taskutils #fccaa7
 agent "<$docker> th2-util" as th2util #fccaa7
 agent "th2-woodpecker" as th2woodpecker #fccaa7
 agent "<$docker> th2-woodpecker-template" as th2woodpeckertemplate #fccaa7
+agent "viewer" as viewer #9ffcc8
 remotehand ..> th2hand : jar
 sailfishcommon ..> sailfishcore #d7d7d7: jar
 sailfishcommon ..> th2codechand #d7d7d7: jar
