@@ -87,7 +87,7 @@ package "codecs" {
   agent "<$docker> th2-codec-csv" as th2codeccsv #fccaa7
   agent "<$docker> th2-codec-fix-orchestra" as th2codecfixorchestra #fccaa7
   agent "th2-codec-generic" as th2codecgeneric #fccaa7
-  agent "<$docker> th2-codec-hand" as th2codechand #fccaa7
+  agent "<$docker> th2-codec-hand" as th2codechand #d7d7d7
   agent "<$docker> th2-codec-hand-html" as th2codechandhtml #fccaa7
   agent "<$docker> th2-codec-html" as th2codechtml #fccaa7
   agent "<$docker> th2-codec-http" as th2codechttp #fccaa7
