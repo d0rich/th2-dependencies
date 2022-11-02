@@ -141,6 +141,7 @@ agent "<$docker> th2-crawler" as th2crawler #fccaa7
 agent "<$docker> th2-crawler-event-healer" as th2crawlereventhealer #fccaa7
 agent "th2-custom-resource-model" as th2customresourcemodel #fccaa7
 agent "<$docker> th2-data-processor-zephyr" as th2dataprocessorzephyr #fccaa7
+agent "<$docker> th2-docs" as th2docs #9ffcc8
 agent "th2-ds-source-lwdp" as th2dssourcelwdp #d7d7d7
 agent "<$docker> th2-event-cache-collector" as th2eventcachecollector #fccaa7
 agent "th2-grpc-act-ssh" as th2grpcactssh #a0cdfa
