@@ -304,7 +304,6 @@ th2grpccrawlerdataprocessor ..> th2check2recon : py
 th2grpccrawlerdataprocessor ..> th2crawlereventhealer : jar
 th2grpccrawlerdataprocessor ..> th2dataprocessorzephyr : jar
 th2grpcdataprovider ..> provider_call : jar
-th2grpcdataprovider ..> th2dataservices : py
 th2grpcdataprovider ..> th2eventcachecollector : jar
 th2grpcdataprovider ..> th2grpccrawlerdataprocessor : jar & py
 th2grpcdataprovider ..> th2lwdataprovider : jar
