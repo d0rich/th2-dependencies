@@ -167,6 +167,7 @@ agent "th2-lib-fix-util-j" as th2libfixutilj #fccaa7
 agent "th2-lib-template-j" as th2libtemplatej #fccaa7
 agent "<$docker> th2-lw-data-provider" as th2lwdataprovider #fccaa7
 agent "th2-netty-bytebuf-utils" as th2nettybytebufutils #fccaa7
+agent "th2-pico-operator" as th2picooperator #fccaa7
 agent "<$docker> th2-python-service-generator" as th2pythonservicegenerator #fccaa7
 agent "<$docker> th2-rdp-profiler" as th2rdpprofiler #9ffcc8
 agent "<$docker> th2-read-csv" as th2readcsv #fccaa7
