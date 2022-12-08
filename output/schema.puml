@@ -146,7 +146,6 @@ agent "th2-ds-source-lwdp" as th2dssourcelwdp #d7d7d7
 agent "<$docker> th2-event-cache-collector" as th2eventcachecollector #fccaa7
 agent "th2-grpc-act-ssh" as th2grpcactssh #a0cdfa
 agent "th2-grpc-act-template" as th2grpcacttemplate #a0cdfa
-agent "th2-grpc-books-validation" as th2grpcbooksvalidation #a0cdfa
 agent "th2-grpc-check1" as th2grpccheck1 #a0cdfa
 agent "th2-grpc-check2-recon" as th2grpccheck2recon #a0cdfa
 agent "th2-grpc-codec" as th2grpccodec #a0cdfa
