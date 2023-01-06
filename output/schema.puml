@@ -133,6 +133,7 @@ agent "<$docker> th2-check1" as th2check1 #fccaa7
 agent "th2-check2-recon" as th2check2recon #ffeb94
 agent "<$docker> th2-check2-recon-template" as th2check2recontemplate #ffeb94
 agent "th2-common-cpp" as th2commoncpp #d7d7d7
+agent "th2-common-go" as th2commongo #d7d7d7
 agent "th2-common-j" as th2commonj #fccaa7
 agent "th2-common-ui-components" as th2commonuicomponents #9ffcc8
 agent "th2-common-utils-j" as th2commonutilsj #fccaa7
