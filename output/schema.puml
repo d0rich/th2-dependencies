@@ -129,6 +129,7 @@ agent "sailfish-core" as sailfishcore #fccaa7
 agent "sailfish-service" as sailfishservice #fccaa7
 agent "th2-bom" as th2bom #fccaa7
 agent "th2-box-descriptor-generator" as th2boxdescriptorgenerator #fccaa7
+agent "<$docker> th2-box-template-j" as th2boxtemplatej #fccaa7
 agent "<$docker> th2-check1" as th2check1 #fccaa7
 agent "th2-check2-recon" as th2check2recon #ffeb94
 agent "<$docker> th2-check2-recon-template" as th2check2recontemplate #ffeb94
@@ -215,6 +216,7 @@ th2commonj .u.> th2actguicore #fccaa7: jar
 th2commonj .u.> th2actssh #fccaa7: jar
 th2commonj .u.> th2acttemplatej #fccaa7: jar
 th2commonj .u.> th2actuibackend #fccaa7: jar
+th2commonj .u.> th2boxtemplatej #fccaa7: jar
 th2commonj .u.> th2check1 #fccaa7: jar
 th2commonj .u.> th2codec #fccaa7: jar
 th2commonj .u.> th2codeccsv #fccaa7: jar
