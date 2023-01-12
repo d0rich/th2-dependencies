@@ -73,6 +73,7 @@ package "th2-infra" {
 package "connectors" {
   agent "<$docker> th2-conn" as th2conn #fccaa7
   agent "<$docker> th2-conn-dirty-fix" as th2conndirtyfix #fccaa7
+  agent "<$docker> th2-conn-dirty-http" as th2conndirtyhttp #fccaa7
   agent "th2-conn-dirty-tcp-core" as th2conndirtytcpcore #fccaa7
   agent "th2-conn-generic" as th2conngeneric #fccaa7
   agent "<$docker> th2-conn-http-client" as th2connhttpclient #fccaa7
@@ -232,6 +233,7 @@ th2commonj .u.> th2codecxml #fccaa7: jar
 th2commonj .u.> th2codecxmlviaxsd #fccaa7: jar
 th2commonj .u.> th2conn #fccaa7: jar
 th2commonj .u.> th2conndirtyfix #fccaa7: jar
+th2commonj .u.> th2conndirtyhttp #fccaa7: jar
 th2commonj .u.> th2conndirtytcpcore #fccaa7: jar
 th2commonj .u.> th2connhttpclient #fccaa7: jar
 th2commonj .u.> th2connhttpserver #fccaa7: jar
@@ -259,10 +261,12 @@ th2commonj .u.> th2woodpecker #fccaa7: jar
 th2commonj .u.> th2woodpeckertemplate #fccaa7: jar
 th2commonpy .u.> th2actcorepy #ffeb94: py
 th2commonpy .u.> th2check2recon #ffeb94: py
+th2commonutilsj .u.> th2conndirtyhttp #fccaa7: jar
 th2commonutilsj .u.> th2conndirtytcpcore #fccaa7: jar
 th2commonutilspy .u.> th2commonpy #ffeb94: py
 th2conn ..> th2conngeneric : docker image base
 th2conndirtytcpcore ..> th2conndirtyfix : jar
+th2conndirtytcpcore ..> th2conndirtyhttp : jar
 th2connhttpclient ..> th2connhttpwsclienttemplate : jar
 th2connwsclient ..> th2connhttpwsclienttemplate : jar
 th2grpcactssh ..> th2actssh : jar
@@ -315,6 +319,7 @@ th2grpcsimtemplate ..> th2simtemplate : jar
 th2grpcutil ..> th2check2recon : py
 th2grpcutil ..> th2util : jar
 th2grpcwoodpecker ..> th2woodpecker : jar
+th2nettybytebufutils ..> th2conndirtyhttp : jar
 th2nettybytebufutils ..> th2conndirtytcpcore : jar
 th2pythonservicegenerator ..> th2grpcgeneratortemplate : docker image for build
 th2readfilecommoncore ..> th2readcsv : jar
