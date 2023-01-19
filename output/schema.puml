@@ -176,6 +176,7 @@ agent "<$docker> th2-read-csv" as th2readcsv #fccaa7
 agent "<$docker> th2-read-file" as th2readfile #fccaa7
 agent "th2-read-file-common-core" as th2readfilecommoncore #fccaa7
 agent "<$docker> th2-read-log" as th2readlog #fccaa7
+agent "<$docker> th2-read-pcap-fix" as th2readpcapfix #fccaa7
 agent "th2-replay-script-generator-core" as th2replayscriptgeneratorcore #fccaa7
 agent "th2-sailfish-utils" as th2sailfishutils #fccaa7
 agent "th2-schema-validator" as th2schemavalidator #fccaa7
@@ -193,6 +194,7 @@ sailfishcommon ..> sailfishcore #d7d7d7: jar
 sailfishcommon ..> th2codechand #d7d7d7: jar
 sailfishcommon ..> th2codechandhtml #d7d7d7: jar
 sailfishcommon ..> th2codechtml #d7d7d7: jar
+sailfishcommon ..> th2readpcapfix #d7d7d7: jar
 sailfishcore ..> sailfishservice #d7d7d7: jar
 sailfishcore ..> th2actuibackend #d7d7d7: jar
 sailfishcore ..> th2sailfishutils #d7d7d7: jar
@@ -252,6 +254,7 @@ th2commonj .u.> th2mstore #fccaa7: jar
 th2commonj .u.> th2readcsv #fccaa7: jar
 th2commonj .u.> th2readfile #fccaa7: jar
 th2commonj .u.> th2readlog #fccaa7: jar
+th2commonj .u.> th2readpcapfix #fccaa7: jar
 th2commonj .u.> th2replayscriptgeneratorcore #fccaa7: jar
 th2commonj .u.> th2rptdataprovider #fccaa7: jar
 th2commonj .u.> th2sailfishutils #fccaa7: jar
@@ -336,5 +339,6 @@ th2sailfishutils ..> th2util #b0b0b0: jar
 th2sim ..> th2simtemplate : jar
 th2storecommon ..> th2estore : jar
 th2storecommon ..> th2mstore : jar
+th2storecommon ..> th2readpcapfix : jar
 th2woodpecker ..> th2woodpeckertemplate : jar
 @enduml
