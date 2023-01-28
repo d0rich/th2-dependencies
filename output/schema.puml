@@ -71,7 +71,6 @@ package "th2-infra" {
   agent "th2-infra-repo" as th2infrarepo #fccaa7
 }
 package "connectors" {
-  agent "<$docker> th2-conn" as th2conn #fccaa7
   agent "<$docker> th2-conn-dirty-fix" as th2conndirtyfix #fccaa7
   agent "<$docker> th2-conn-dirty-http" as th2conndirtyhttp #fccaa7
   agent "th2-conn-dirty-tcp-core" as th2conndirtytcpcore #fccaa7
@@ -81,6 +80,7 @@ package "connectors" {
   agent "<$docker> th2-conn-http-ws-client-template" as th2connhttpwsclienttemplate #fccaa7
   agent "<$docker> th2-conn-kafka" as th2connkafka #fccaa7
   agent "<$docker> th2-conn-qfj" as th2connqfj #fccaa7
+  agent "<$docker> th2-conn-sailfish" as th2connsailfish #fccaa7
   agent "<$docker> th2-conn-ws-client" as th2connwsclient #fccaa7
 }
 package "codecs" {
@@ -205,7 +205,6 @@ th2bom ..> th2grpcgeneratortemplate : jar
 th2bom ..> th2grpcservicegenerator : jar
 th2check2recon ..> th2check2recontemplate : py
 th2codec ..> th2codecfixorchestra : jar
-th2codec ..> th2codecgeneric : docker image base
 th2codec ..> th2codechttp : jar
 th2codec ..> th2codecjson : jar
 th2codec ..> th2codecjsondictionaryless : jar
@@ -233,7 +232,6 @@ th2commonj .u.> th2codecmoldudp64 #fccaa7: jar
 th2commonj .u.> th2codecsailfish #fccaa7: jar
 th2commonj .u.> th2codecxml #fccaa7: jar
 th2commonj .u.> th2codecxmlviaxsd #fccaa7: jar
-th2commonj .u.> th2conn #fccaa7: jar
 th2commonj .u.> th2conndirtyfix #fccaa7: jar
 th2commonj .u.> th2conndirtyhttp #fccaa7: jar
 th2commonj .u.> th2conndirtytcpcore #fccaa7: jar
@@ -242,6 +240,7 @@ th2commonj .u.> th2connhttpserver #fccaa7: jar
 th2commonj .u.> th2connhttpwsclienttemplate #fccaa7: jar
 th2commonj .u.> th2connkafka #fccaa7: jar
 th2commonj .u.> th2connqfj #fccaa7: jar
+th2commonj .u.> th2connsailfish #fccaa7: jar
 th2commonj .u.> th2connwsclient #fccaa7: jar
 th2commonj .u.> th2crawler #fccaa7: jar
 th2commonj .u.> th2crawlereventhealer #fccaa7: jar
@@ -267,7 +266,6 @@ th2commonpy .u.> th2check2recon #ffeb94: py
 th2commonutilsj .u.> th2conndirtyhttp #fccaa7: jar
 th2commonutilsj .u.> th2conndirtytcpcore #fccaa7: jar
 th2commonutilspy .u.> th2commonpy #ffeb94: py
-th2conn ..> th2conngeneric : docker image base
 th2conndirtytcpcore ..> th2conndirtyfix : jar
 th2conndirtytcpcore ..> th2conndirtyhttp : jar
 th2connhttpclient ..> th2connhttpwsclienttemplate : jar
@@ -334,9 +332,8 @@ th2sailfishutils ..> th2codecjson #b0b0b0: jar
 th2sailfishutils ..> th2codecsailfish #b0b0b0: jar
 th2sailfishutils ..> th2codecxml #b0b0b0: jar
 th2sailfishutils ..> th2codecxmlviaxsd #b0b0b0: jar
-th2sailfishutils ..> th2conn #b0b0b0: jar
+th2sailfishutils ..> th2connsailfish #b0b0b0: jar
 th2sailfishutils ..> th2util #b0b0b0: jar
-th2sim ..> th2simtemplate : jar
 th2storecommon ..> th2estore : jar
 th2storecommon ..> th2mstore : jar
 th2storecommon ..> th2readpcapfix : jar
