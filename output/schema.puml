@@ -204,6 +204,7 @@ th2bom ..> th2grpccommon : jar
 th2bom ..> th2grpcgeneratortemplate : jar
 th2bom ..> th2grpcservicegenerator : jar
 th2check2recon ..> th2check2recontemplate : py
+th2codec ..> th2codeccsv : jar
 th2codec ..> th2codecfixorchestra : jar
 th2codec ..> th2codechttp : jar
 th2codec ..> th2codecjson : jar
