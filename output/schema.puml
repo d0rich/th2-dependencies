@@ -297,7 +297,6 @@ th2grpccommon ..> th2grpchand #a0cdfa: jar & py
 th2grpccommon ..> th2grpcsim #a0cdfa: jar & py
 th2grpccommon ..> th2grpcutil #a0cdfa: jar & py
 th2grpccommon ..> th2grpcwoodpecker #a0cdfa: jar & py
-th2grpccommon ..> th2hand #a0cdfa: jar
 th2grpccommon ..> th2libfixutilj #a0cdfa: jar
 th2grpccommon ..> th2libtemplatej #a0cdfa: jar
 th2grpccommon ..> th2readfilecommoncore #a0cdfa: jar
@@ -314,6 +313,7 @@ th2grpcdataprovider ..> th2lwdataprovider : jar
 th2grpcdataprovider ..> th2rptdataprovider : jar
 th2grpcgeneratortemplate ..> th2grpccommon : Git fork
 th2grpchand ..> th2actguicore : jar
+th2grpchand ..> th2hand : jar
 th2grpcservicegenerator ..> th2grpccommon : Gradle plugin
 th2grpcsim ..> th2grpcsimtemplate : jar & py
 th2grpcsim ..> th2sim : jar
