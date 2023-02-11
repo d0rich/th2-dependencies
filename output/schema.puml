@@ -321,6 +321,7 @@ th2grpcsimtemplate ..> th2simtemplate : jar
 th2grpcutil ..> th2check2recon : py
 th2grpcutil ..> th2util : jar
 th2grpcwoodpecker ..> th2woodpecker : jar
+th2nettybytebufutils ..> th2conndirtyfix : jar
 th2nettybytebufutils ..> th2conndirtyhttp : jar
 th2nettybytebufutils ..> th2conndirtytcpcore : jar
 th2pythonservicegenerator ..> th2grpcgeneratortemplate : docker image for build
