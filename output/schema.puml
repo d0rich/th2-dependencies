@@ -332,7 +332,6 @@ th2sailfishutils ..> th2check1 #b0b0b0: jar
 th2sailfishutils ..> th2codechttp #b0b0b0: jar
 th2sailfishutils ..> th2codecjson #b0b0b0: jar
 th2sailfishutils ..> th2codecsailfish #b0b0b0: jar
-th2sailfishutils ..> th2codecxml #b0b0b0: jar
 th2sailfishutils ..> th2codecxmlviaxsd #b0b0b0: jar
 th2sailfishutils ..> th2connsailfish #b0b0b0: jar
 th2sailfishutils ..> th2util #b0b0b0: jar
