@@ -138,6 +138,7 @@ agent "th2-common-cpp" as th2commoncpp #d7d7d7
 agent "th2-common-go" as th2commongo #d7d7d7
 agent "th2-common-j" as th2commonj #fccaa7
 agent "th2-common-ui-components" as th2commonuicomponents #9ffcc8
+agent "th2-common-utils-go" as th2commonutilsgo #d7d7d7
 agent "th2-common-utils-j" as th2commonutilsj #fccaa7
 agent "<$docker> th2-cr-converter" as th2crconverter #fccaa7
 agent "<$docker> th2-crawler" as th2crawler #fccaa7
