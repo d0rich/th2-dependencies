@@ -267,6 +267,7 @@ th2commonpy .u.> th2actcorepy #ffeb94: py
 th2commonpy .u.> th2check2recon #ffeb94: py
 th2commonutilsj .u.> th2conndirtyhttp #fccaa7: jar
 th2commonutilsj .u.> th2conndirtytcpcore #fccaa7: jar
+th2commonutilsj .u.> th2connkafka #fccaa7: jar
 th2commonutilspy .u.> th2commonpy #ffeb94: py
 th2conndirtytcpcore ..> th2conndirtyfix : jar
 th2conndirtytcpcore ..> th2conndirtyhttp : jar
