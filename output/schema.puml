@@ -282,7 +282,6 @@ th2grpccheck1 ..> th2acttemplatej : jar
 th2grpccheck1 ..> th2check1 : jar
 th2grpccommon ..> th2actguicore #a0cdfa: jar
 th2grpccommon ..> th2actuibackend #a0cdfa: jar
-th2grpccommon ..> th2codec #a0cdfa: jar
 th2grpccommon ..> th2commonj #a0cdfa: jar
 th2grpccommon ..> th2commonpy #a0cdfa: py
 th2grpccommon ..> th2commonutilsj #a0cdfa: jar
