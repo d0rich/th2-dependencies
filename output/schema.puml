@@ -195,7 +195,6 @@ sailfishcommon ..> sailfishcore #d7d7d7: jar
 sailfishcommon ..> th2codechand #d7d7d7: jar
 sailfishcommon ..> th2codechandhtml #d7d7d7: jar
 sailfishcommon ..> th2codechtml #d7d7d7: jar
-sailfishcommon ..> th2readpcapfix #d7d7d7: jar
 sailfishcore ..> sailfishservice #d7d7d7: jar
 sailfishcore ..> th2actuibackend #d7d7d7: jar
 sailfishcore ..> th2sailfishutils #d7d7d7: jar
@@ -338,6 +337,5 @@ th2sailfishutils ..> th2connsailfish #b0b0b0: jar
 th2sailfishutils ..> th2util #b0b0b0: jar
 th2storecommon ..> th2estore : jar
 th2storecommon ..> th2mstore : jar
-th2storecommon ..> th2readpcapfix : jar
 th2woodpecker ..> th2woodpeckertemplate : jar
 @enduml
