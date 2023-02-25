@@ -123,6 +123,7 @@ package "Python Script Utils" {
 }
 agent "cradleapi" as cradleapi #fccaa7
 agent "infra-operator-tpl" as infraoperatortpl #d7d7d7
+agent "jsonToHtmlParser" as jsonToHtmlParser #9ffcc8
 agent "<$docker> provider_call" as provider_call #fccaa7
 agent "remotehand" as remotehand #fccaa7
 agent "sailfish-common" as sailfishcommon #fccaa7
