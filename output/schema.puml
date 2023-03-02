@@ -185,6 +185,7 @@ agent "th2-schema-validator" as th2schemavalidator #fccaa7
 agent "th2-sense" as th2sense #fccaa7
 agent "th2-sim" as th2sim #fccaa7
 agent "<$docker> th2-sim-template" as th2simtemplate #fccaa7
+agent "<$docker> th2-storage-services" as th2storageservices #fccaa7
 agent "th2-store-common" as th2storecommon #fccaa7
 agent "th2-task-utils" as th2taskutils #fccaa7
 agent "<$docker> th2-util" as th2util #fccaa7
